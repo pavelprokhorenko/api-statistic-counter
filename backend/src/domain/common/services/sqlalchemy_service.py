@@ -26,8 +26,8 @@ class AsyncSQLAlchemyService(AsyncDBServiceInterface, Generic[Entity, CreateDTO,
         entity = self._entity.from_orm(row)
         return entity
 
-    async def bulk_receive(self) -> list[Entity]:
-        rows = await self._repository.bulk_receive()
+    async def bulk_receive(self, order_by: list[str] | None = None) -> list[Entity]:
+        rows = await self._repository.bulk_receive(order_by=order_by)
         entities = [self._entity.from_orm(row) for row in rows]
         return entities
 

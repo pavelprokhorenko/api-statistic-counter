@@ -9,12 +9,14 @@ router = APIRouter()
 
 @router.get("/", status_code=status.HTTP_200_OK, response_model=list[StatisticEntity])
 async def receive_statistics(
-    from_: date | None = Query(None, alias="from"), to: date | None = Query(None)
+    from_: date | None = Query(None, alias="from"),
+    to: date | None = Query(None),
+    order_by: list[str] | None = Query(None),
 ) -> list[StatisticEntity]:
     """
     Retrieve statistics.
     """
-    return await statistic_service.bulk_receive(from_=from_, to=to)
+    return await statistic_service.bulk_receive(from_=from_, to=to, order_by=order_by)
 
 
 @router.post("/", status_code=status.HTTP_201_CREATED, response_model=list[StatisticEntity])
