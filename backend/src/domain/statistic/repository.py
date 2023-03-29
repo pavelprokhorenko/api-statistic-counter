@@ -25,7 +25,7 @@ class StatisticRepository(AsyncSQLAlchemyRepository):
             if order_by:
                 ordering = generate_order_by_fields(order_by)
                 query = query.order_by(*ordering)
-                print(ordering)
+
             scalar_result = await session.scalars(query)
 
             rows = scalar_result.all()
