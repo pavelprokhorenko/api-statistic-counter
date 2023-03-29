@@ -25,7 +25,7 @@ class BackendService:
             ),
         ]
 
-        self._asgi_app = FastAPI(middleware=middleware)
+        self._asgi_app = FastAPI(middleware=middleware, version=self._settings.VERSION)
 
     def get_app(self) -> FastAPI:
         """
