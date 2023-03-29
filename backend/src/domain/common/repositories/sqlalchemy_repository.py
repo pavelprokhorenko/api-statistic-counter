@@ -5,6 +5,7 @@ from sqlalchemy import Row, delete, insert, select, update
 from src.db.session import async_postgres
 from src.domain.common.exceptions import RowNotFound
 from src.domain.common.interfaces import AsyncDBRepositoryInterface
+from src.domain.common.orm_utils import generate_order_by_fields
 from src.domain.common.typevars import CreateDTO, Model, UpdateDTO
 
 
@@ -32,9 +33,14 @@ class AsyncSQLAlchemyRepository(AsyncDBRepositoryInterface):
 
         return row
 
-    async def bulk_receive(self) -> list[Row]:
+    async def bulk_receive(self, order_by: list[str] | None = None) -> list[Row]:
         async with self._session() as session:
             query = select(self._model)
+
+            if order_by:
+                ordering = generate_order_by_fields(order_by)
+                query = query.order_by(*ordering)
+
             scalar_result = await session.scalars(query)
 
             rows = scalar_result.all()

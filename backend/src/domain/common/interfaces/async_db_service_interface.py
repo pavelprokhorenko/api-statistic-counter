@@ -20,7 +20,7 @@ class AsyncDBServiceInterface(metaclass=ABCMeta):
         """
 
     @abstractmethod
-    async def bulk_receive(self) -> list[Entity]:
+    async def bulk_receive(self, order_by: list[str] | None = None) -> list[Entity]:
         """
         Receive multiple entity.
         """

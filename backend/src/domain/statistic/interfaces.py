@@ -6,7 +6,9 @@ from src.domain.common.typevars import Model
 
 
 class StatisticRepositoryInterface(AsyncDBRepositoryInterface, metaclass=ABCMeta):
-    async def bulk_receive(self, from_: date | None = None, to: date | None = None) -> list[Model]:
+    async def bulk_receive(
+        self, from_: date | None = None, to: date | None = None, order_by: list[str] | None = None
+    ) -> list[Model]:
         """
         Receive multiple rows with filters by date.
         """

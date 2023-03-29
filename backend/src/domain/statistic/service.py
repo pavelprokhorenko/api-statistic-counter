@@ -17,9 +17,9 @@ class StatisticService(AsyncSQLAlchemyService[StatisticEntity, StatisticDto, Non
     _repository: StatisticRepositoryInterface
 
     async def bulk_receive(
-        self, from_: date | None = None, to: date | None = None
+        self, from_: date | None = None, to: date | None = None, order_by: list[str] | None = None
     ) -> list[StatisticEntity]:
-        return await self._repository.bulk_receive(from_=from_, to=to)
+        return await self._repository.bulk_receive(from_=from_, to=to, order_by=order_by)
 
     async def delete_all(self) -> None:
         await self._repository.delete_all()
