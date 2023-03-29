@@ -1,15 +1,15 @@
 """statistic table
 
-Revision ID: 02e14cf668e7
+Revision ID: 0c5ce169f089
 Revises:
-Create Date: 2023-03-29 14:29:07.732847+00:00
+Create Date: 2023-03-29 15:03:13.614589+00:00
 
 """
 import sqlalchemy as sa
 from alembic import op
 
 # revision identifiers, used by Alembic.
-revision = "02e14cf668e7"
+revision = "0c5ce169f089"
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -21,9 +21,9 @@ def upgrade():
         "statistic",
         sa.Column("id", sa.Integer(), autoincrement=True, nullable=False),
         sa.Column("date", sa.Date(), nullable=False),
-        sa.Column("views", sa.Integer(), server_default="0", nullable=False),
-        sa.Column("clicks", sa.Integer(), server_default="0", nullable=False),
-        sa.Column("cost", sa.Numeric(scale=2), nullable=False),
+        sa.Column("views", sa.Integer(), nullable=True),
+        sa.Column("clicks", sa.Integer(), nullable=True),
+        sa.Column("cost", sa.Numeric(scale=2), nullable=True),
         sa.PrimaryKeyConstraint("id"),
     )
     # ### end Alembic commands ###
