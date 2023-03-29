@@ -13,13 +13,13 @@ class AsyncSQLAlchemyService(AsyncDBServiceInterface, Generic[Entity, CreateDTO,
 
     def __init__(
         self,
-        model: Model,
-        entity: Entity,
+        model: type[Model],
+        entity: type[Entity],
         *,
         repository: type[AsyncSQLAlchemyRepository] = AsyncSQLAlchemyRepository,
     ) -> None:
         self._entity = entity
-        self._repository = repository(model)
+        self._repository = repository(model=model)
 
     async def receive(self, *, row_id: Any) -> Entity:
         row = await self._repository.receive(row_id=row_id)

@@ -13,7 +13,7 @@ class AsyncSQLAlchemyRepository(AsyncDBRepositoryInterface):
     Asynchronous SQLAlchemy repository implementation.
     """
 
-    def __init__(self, model: Model) -> None:
+    def __init__(self, model: type[Model]) -> None:
         self._model = model
         self._session = async_postgres.session
 
