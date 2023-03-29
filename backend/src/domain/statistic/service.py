@@ -5,6 +5,7 @@ from src.models import Statistic
 
 from .dto import StatisticDto
 from .entity import StatisticEntity
+from .interfaces import StatisticRepositoryInterface
 from .repository import StatisticRepository
 
 
@@ -13,7 +14,7 @@ class StatisticService(AsyncSQLAlchemyService[StatisticEntity, StatisticDto, Non
     Statistic Domain layer.
     """
 
-    _repository: StatisticRepository
+    _repository: StatisticRepositoryInterface
 
     async def bulk_receive(
         self, from_: date | None = None, to: date | None = None
