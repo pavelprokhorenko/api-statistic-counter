@@ -29,7 +29,7 @@ repos:
           - __init__.py,base.py,src/db/base.py
           - --remove-duplicate-keys
   - repo: https://github.com/pycqa/isort
-    rev: 5.10.1
+    rev: 5.12.0
     hooks:
       - id: isort
         args:
