@@ -45,8 +45,8 @@ class AsyncSQLAlchemyRepository(AsyncDBRepositoryInterface):
     async def bulk_create(self, dtos: list[CreateDTO]) -> list[Row]:
         async with self._session() as session:
             new_rows_data = [dto.dict(exclude_unset=True) for dto in dtos]
-            query = insert(self._model).values(new_rows_data).returning(self._model)
-            scalar_result = await session.scalars(query)
+            query = insert(self._model).returning(self._model)
+            scalar_result = await session.scalars(query, params=new_rows_data)
 
             rows = scalar_result.all()
             await session.commit()

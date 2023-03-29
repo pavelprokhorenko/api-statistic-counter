@@ -8,7 +8,7 @@ from .entity import StatisticEntity
 from .repository import StatisticRepository
 
 
-class StatisticService(AsyncSQLAlchemyService[StatisticEntity, StatisticDto]):
+class StatisticService(AsyncSQLAlchemyService[StatisticEntity, StatisticDto, None]):
     """
     Statistic Domain layer.
     """
