@@ -1,14 +1,24 @@
+from datetime import date
+
 from src.domain.common.services.sqlalchemy_service import AsyncSQLAlchemyService
 from src.models import Statistic
 
 from .dto import StatisticDto
 from .entity import StatisticEntity
+from .repository import StatisticRepository
 
 
 class StatisticService(AsyncSQLAlchemyService[StatisticEntity, StatisticDto]):
     """
-    Statistic Domain.
+    Statistic Domain layer.
     """
 
+    _repository: StatisticRepository
 
-statistic_service = StatisticService(model=Statistic, entity=StatisticEntity)
+    async def bulk_receive(
+        self, from_: date | None = None, to: date | None = None
+    ) -> list[StatisticEntity]:
+        return await self._repository.bulk_receive(from_=from_, to=to)
+
+
+statistic_service = StatisticService(Statistic, StatisticEntity, repository=StatisticRepository)

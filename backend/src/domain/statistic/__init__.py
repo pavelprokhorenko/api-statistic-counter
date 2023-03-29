@@ -1,3 +1,3 @@
 from .dto import StatisticDto
 from .entity import StatisticEntity
-from .service import StatisticService
+from .service import StatisticService, statistic_service
