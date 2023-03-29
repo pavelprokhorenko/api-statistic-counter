@@ -1,0 +1,46 @@
+[project]
+name = "Statistic Counter"
+description = "Microservice to implement a statistic counter."
+authors = [
+    {name = "Pavel Prokhorenko", email="prohorenkopavel74@gmail.com"},
+]
+classifiers = [
+    "Intended Audience :: Information Technology",
+    "Intended Audience :: System Administrators",
+    "Intended Audience :: Developers",
+    "Operating System :: OS Independent",
+    "Topic :: Internet",
+    "Topic :: Software Development",
+    "Topic :: Internet :: WWW/HTTP :: HTTP Servers",
+    "Topic :: Internet :: WWW/HTTP",
+    "Typing :: Typed",
+    "Environment :: Web Environment",
+    "Framework :: AsyncIO",
+    "Framework :: FastAPI",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3 :: Only",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+]
+
+dynamic = ["dependencies", "version"]
+readme = "README.md"
+requires-python = ">=3.11"
+
+[tool.setuptools.dynamic]
+dependencies = {file = ["requirements.txt"]}
+
+[project.urls]
+homepage = "https://github.com/pavelprokhorenko/api-statistic-counter"
+documentation = "https://github.com/pavelprokhorenko/api-statistic-counter"
+repository = "https://github.com/pavelprokhorenko/api-statistic-counter"
+
+[tool.black]
+line-length = 100
+
+[tool.isort]
+profile = "black"
+known_first_party = ["src"]
+line_length = 100
