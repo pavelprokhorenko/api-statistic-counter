@@ -3,6 +3,7 @@ from fastapi.middleware import Middleware
 from fastapi.middleware.cors import CORSMiddleware
 from uvicorn import run
 
+from src.api.endpoints.routers import api_router
 from src.config.settings import BackendSettings, backend_settings
 
 
@@ -26,6 +27,7 @@ class BackendService:
         ]
 
         self._asgi_app = FastAPI(middleware=middleware, version=self._settings.VERSION)
+        self._asgi_app.include_router(api_router)
 
     def get_app(self) -> FastAPI:
         """
