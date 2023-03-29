@@ -1,9 +1,8 @@
 from datetime import date
 
-from sqlalchemy import select
+from sqlalchemy import delete, select
 
 from src.domain.common.repositories.sqlalchemy_repository import AsyncSQLAlchemyRepository
-from src.models import Statistic
 
 from .entity import StatisticEntity
 
@@ -19,9 +18,9 @@ class StatisticRepository(AsyncSQLAlchemyRepository):
         async with self._session() as session:
             query = select(self._model)
             if from_:
-                query = query.where(Statistic.date >= from_)
+                query = query.where(self._model.date >= from_)
             if to:
-                query = query.where(Statistic.date <= to)
+                query = query.where(self._model.date <= to)
 
             scalar_result = await session.scalars(query)
 
@@ -29,3 +28,9 @@ class StatisticRepository(AsyncSQLAlchemyRepository):
             await session.commit()
 
         return rows
+
+    async def delete_all(self) -> None:
+        async with self._session() as session:
+            query = delete(self._model)
+            await session.execute(query)
+            await session.commit()

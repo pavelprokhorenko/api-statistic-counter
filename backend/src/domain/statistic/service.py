@@ -20,5 +20,8 @@ class StatisticService(AsyncSQLAlchemyService[StatisticEntity, StatisticDto]):
     ) -> list[StatisticEntity]:
         return await self._repository.bulk_receive(from_=from_, to=to)
 
+    async def delete_all(self) -> None:
+        await self._repository.delete_all()
+
 
 statistic_service = StatisticService(Statistic, StatisticEntity, repository=StatisticRepository)
